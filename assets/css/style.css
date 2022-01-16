@@ -1,0 +1,286 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, input, button {
+    font-family: 'Open Sans', sans-serif;
+}
+
+input, button {
+    font-size: 16px;
+}
+
+.header {
+    background: #fff;
+    transition: all 0.5s;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+}
+
+.header .logo {
+    color: #5f687b;
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+
+main {
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 82px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #f3f3f5;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+form {
+    margin-top: 6px;
+}
+
+.form-group {
+    margin: 8px 0;
+}
+
+.form-group > label {
+    color: #5f687b;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+}
+
+.form-group > input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e1e1e4;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+.form-group > input:focus {
+    outline: none !important;
+    border: 1px solid #16df7e;
+    box-shadow: 0 0 10px #e1e1e4;
+}
+
+.border-top {
+    border-top: 2px solid #16df7e;
+}
+
+section > h2{
+    text-transform: uppercase;
+    color: #5f687b;
+    font-size: 20px;
+}
+
+/* INPUT SECTION */
+.input-section > h2 {
+    text-align: center;
+}
+
+.input-section > form > button {
+    background-color: #16df7e;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    display: block;
+    transition: 0.3s;
+    width: 100%;
+    padding: 11px;
+    cursor: pointer;
+}
+
+.input-section > form > button > span {
+    font-weight: bold;
+}
+
+.input-section > form > button:hover {
+    background: #206bfb;
+    border-color: #206bfb;
+}
+
+.input-section > form > .input-inline {
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+}
+
+.input-section > form > .input-inline > label {
+    color: #737781;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+
+
+/* SEARCH SECTION */
+
+.search-section > h2 {
+    text-align: center;
+}
+
+.search-section > div{
+    margin-top: 6px;
+}
+
+.search-section form {
+    background: #fff;
+    padding: 4px 4px;
+    position: relative;
+    border-radius: 4px;
+    text-align: left;
+    border: 1px solid #e4e6ea;
+}
+
+.search-section form input {
+    border: 0;
+    padding: 8px 8px;
+    width: calc(100% - 100px);
+}
+
+.search-section form input:focus {
+    outline: none !important;
+}
+
+.search-section form button {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background: #16df7e;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.search-section form button:hover {
+    background: #206bfb;
+}
+
+
+/* Book Self */
+
+.book-shelf > .book-list {
+    margin-top: 4px;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5f687b;
+}
+
+.book-shelf > .book-list > .book-item {
+    padding: 8px 16px 16px 16px;
+    border: 1px solid #16df7e;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.book-shelf > .book-list > .book-item > h3, p {
+    margin: 8px 0;
+}
+
+.book-shelf > .book-list > .book-item > .action > button {
+    border: 0;
+    padding: 8px;
+    margin: 0 5px 0 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-blue {
+    background-color: #2d89ef;
+    color: white;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-blue:hover {
+    background-color: #2b5797;
+    color: white;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-yellow {
+    background-color: #ffc40d;
+    color: black;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-yellow:hover {
+    background-color: #e3a21a;
+    color: black;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-red {
+    background-color: #ee1111;
+    color: white;
+}
+
+.book-shelf > .book-list > .book-item > .action > .btn-red:hover {
+    background-color: #b91d47;
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .book-shelf > .book-list > .book-item > .action > .btn-red, .book-shelf > .book-list > .book-item > .action > .btn-yellow, .book-shelf > .book-list > .book-item > .action > .btn-blue {
+      float: none;
+      margin-top: 5px;
+      -moz-text-align-last: center;
+      text-align-last: center;
+    }
+}
+
+
+.footer{
+    border-top: 1px solid #d9dce2;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5f687b;
+}
+
+.footer > div {
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+  
+.footer .copyright {
+    float: left;
+}
+.footer .copyright a {
+    text-decoration: none;
+}
+  
+.footer .portfolio {
+    float: right;
+    font-size: 14px;
+}
+
+@media (max-width: 992px) {
+    .footer .copyright, .footer .portfolio {
+      float: none;
+      -moz-text-align-last: center;
+      text-align-last: center;
+    }
+}
