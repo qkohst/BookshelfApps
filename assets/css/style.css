@@ -249,6 +249,60 @@ section > h2{
     }
 }
 
+div .form-edit {
+    display: none;
+    margin-top: 11px;
+    border-radius: 4px;
+    background-color: #f9f9fa;
+    border: 1px solid #e4e6ea;
+}
+
+div .form-edit .edit-title {
+    padding: 8px 16px 8px 16px;
+    border-bottom: 2px solid #16df7e;
+}
+
+div .form-edit .edit-body {
+    padding: 8px 16px 8px 16px;
+}
+
+div .form-edit .edit-footer {
+    padding: 0px 16px 8px 16px;
+    text-align: end;
+}
+
+div .form-edit .edit-footer .btn-submit {
+    background-color: #16df7e;
+    color: #fff;
+    border: 1px solid #16df7e;
+    border-radius: 5px;
+    transition: 0.3s;
+    padding: 8px;
+    cursor: pointer;
+}
+
+div .form-edit .edit-footer .btn-submit:hover {
+    background: #206bfb;
+    border-color: #206bfb;
+}
+
+div .form-edit .edit-footer .btn-undo {
+    background-color: #fff;
+    color: #5f687b;
+    border: 1px solid #5f687b;
+    border-radius: 5px;
+    transition: 0.3s;
+    padding: 8px;
+    cursor: pointer;
+}
+
+div .form-edit .edit-footer .btn-undo:hover {
+    background: #5f687b;
+    border-color: #5f687b;
+    color: #fff;
+}
+
+
 
 .footer{
     border-top: 1px solid #d9dce2;
