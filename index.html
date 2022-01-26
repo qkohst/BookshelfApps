@@ -7,22 +7,24 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Qkoh St | BookshelfApps</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo_qkohst.png">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
     <header class="header">
-        <div class="container d-flex align-items-center">
-            <h1 class="logo">Bookshelf Apps</h1>
-        </div>
+        <a href="https://qkohst.github.io" target="_black">
+            <img src="assets/img/logo_qkohst.png" class="logo">
+            <h1 class="apps-title">BookshelfApps</h1>
+        </a>
     </header>
 
     <main>
 
         <section class="input-section">
             <h2>Masukkan Buku Baru</h2>
-            <form id="inputBook" class="border-top">
+            <form id="inputBookForm" class="border-top">
                 <div class="form-group">
                     <label for="inputBookTitle">Judul</label>
                     <input id="inputBookTitle" type="text" required>
@@ -39,9 +41,9 @@
 
                 <div class="input-inline">
                     <label for="inputBookIsComplete">Selesai dibaca</label>
-                    <input id="inputBookIsComplete" type="checkbox">
+                    <input id="inputBookIsComplete" type="checkbox" onchange="updateRack()">
                 </div>
-                <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
+                <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span id="rack">Belum selesai dibaca</span></button>
             </form>
         </section>
 
@@ -49,7 +51,7 @@
             <h2>Cari Buku (Opsional)</h2>
             <div class="border-top">
                 <form id="searchBook">
-                    <input type="text" id="searchBookTitle" placeholder="Masukkan judul buku"><button id="searchSubmit"
+                    <input type="text" id="searchBookTitle" placeholder="Masukkan judul buku" required><button id="searchSubmit"
                         type="submit">Cari Buku</button>
                 </form>
             </div>
@@ -59,14 +61,15 @@
             <h2>Belum selesai dibaca</h2>
 
             <div id="incompleteBookshelfList" class="book-list border-top">
-                <article class="book-item">
+
+                <!-- <article class="book-item">
                     <h3>Book Title</h3>
                     <p>Penulis: John Doe</p>
                     <p>Tahun: 2002</p>
 
                     <div class="action">
                         <button class="btn-blue">Selesai dibaca</button>
-                        <button id="btnEdit1" class="btn-yellow" onclick="showForm(1)">Edit Data</button>
+                        <button id="btnEdit1" class="btn-yellow" onclick="showHideForm(1)">Edit Data</button>
                         <button class="btn-red">Hapus</button>
                     </div>
 
@@ -95,7 +98,8 @@
                             </div>
                         </form>
                     </div>
-                </article>
+                </article> -->
+
             </div>
         </section>
 
@@ -104,14 +108,14 @@
 
             <div id="completeBookshelfList" class="book-list border-top">
 
-                <article class="book-item">
+                <!-- <article class="book-item">
                     <h3>Book Title</h3>
                     <p>Penulis: John Doe</p>
                     <p>Tahun: 2002</p>
 
                     <div class="action">
                         <button class="btn-blue">Belum selesai di Baca</button>
-                        <button id="btnEdit1" class="btn-yellow" onclick="showForm(2)">Edit Data</button>
+                        <button id="btnEdit1" class="btn-yellow" onclick="showHideForm(2)">Edit Data</button>
                         <button class="btn-red">Hapus</button>
                     </div>
 
@@ -140,7 +144,7 @@
                             </div>
                         </form>
                     </div>
-                </article>
+                </article> -->
 
             </div>
         </section>
@@ -159,7 +163,10 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js" type="text/javascript"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/dom.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
