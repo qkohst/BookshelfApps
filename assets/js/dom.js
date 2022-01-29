@@ -19,11 +19,19 @@ function addBook() {
 
   const book = makeBook(title, author, year, isComplete);
 
+  const bookObject = composeBookObject(title, author, year, isComplete);
+
+
   if (isComplete.checked) {
     completedBOOKShelfList.append(book);
   } else {
     incompletedBOOKShelfList.append(book);
   }
+
+  book[BOOK_ITEM_ID] = bookObject.id;
+  books.push(bookObject);
+
+  updateDataToStorage();
 }
 
 // Menampilkan item dalam rak
@@ -108,7 +116,7 @@ function makeBook(title, author, year, isComplete) {
   article.classList.add("book-item")
   article.append(titleBook, authorBook, yearBook, actionMenu, formEdit);
 
-  if (isComplete.checked) {
+  if (isComplete.checked || isComplete == true) {
     actionMenu.append(
       createIncompleteButton(),
       createEditButton(),
@@ -126,22 +134,22 @@ function makeBook(title, author, year, isComplete) {
 }
 
 // bUTTON
-function createCompleteButton(eventListener) {
+function createCompleteButton() {
   const button = document.createElement("button");
   button.innerText = "Selesai Dibaca";
   button.classList.add("btn-blue");
   button.addEventListener("click", function (event) {
-    eventListener(event);
+    moveBookToCompleted(event.target.parentElement.parentElement);
   });
   return button;
 }
 
-function createIncompleteButton(eventListener) {
+function createIncompleteButton() {
   const button = document.createElement("button");
   button.innerText = "Belum Selesai Dibaca";
   button.classList.add("btn-blue");
   button.addEventListener("click", function (event) {
-    eventListener(event);
+    moveBookToIncompleted(event.target.parentElement.parentElement);
   });
   return button;
 }
@@ -192,8 +200,40 @@ function createButtonSubmit(eventListener) {
 
 // Hapus List Buku 
 function deleteBook(taskElement) {
+  const bookPosition = findbookIndex(taskElement[BOOK_ITEM_ID]);
+  books.splice(bookPosition, 1);
+
   taskElement.remove();
+  updateDataToStorage();
 }
 
+// Memindahkan Book ke Rak Sudah Dibaca 
 
+function moveBookToCompleted(taskElement) {
+  const completeBookshelfList = document.getElementById(COMPLETE_BOOK_SHELF_LIST);
+  const Book = findBook(taskElement[BOOK_ITEM_ID]);
+  const newBook = makeBook(Book.title, Book.author, Book.year, true);
+
+  Book.isComplete = true;
+  newBook[BOOK_ITEM_ID] = book.id;
+
+  completeBookshelfList.append(newBook);
+  taskElement.remove();
+
+  updateDataToStorage();
+}
+
+function moveBookToIncompleted(taskElement) {
+  const incompleteBookshelfList = document.getElementById(INCOMPLETE_BOOK_SHELF_LIST);
+  const Book = findBook(taskElement[BOOK_ITEM_ID]);
+  const newBook = makeBook(Book.title, Book.author, Book.year, false);
+
+  Book.isComplete = false;
+  newBook[BOOK_ITEM_ID] = book.id;
+
+  incompleteBookshelfList.append(newBook);
+  taskElement.remove();
+
+  updateDataToStorage();
+}
 
