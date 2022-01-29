@@ -26,7 +26,7 @@ function addBook() {
   }
 }
 
-// Menampilkan item dalam rak belum dibaca 
+// Menampilkan item dalam rak
 function makeBook(title, author, year, isComplete) {
 
   const titleBook = document.createElement("h3");
@@ -156,12 +156,12 @@ function createEditButton(eventListener) {
   return button;
 }
 
-function createDeleteButton(eventListener) {
+function createDeleteButton() {
   const button = document.createElement("button");
   button.innerText = "Hapus";
   button.classList.add("btn-red");
   button.addEventListener("click", function (event) {
-    eventListener(event);
+    deleteBook(event.target.parentElement.parentElement);
   });
   return button;
 }
@@ -189,6 +189,11 @@ function createButtonSubmit(eventListener) {
 }
 
 //end bUTTON
+
+// Hapus List Buku 
+function deleteBook(taskElement) {
+  taskElement.remove();
+}
 
 
 
