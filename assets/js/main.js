@@ -11,8 +11,8 @@ function updateRack() {
 }
 
 
-function showHideForm(a) {
-  let formEdit = document.getElementById("formEdit" + a);
+function showHideForm(id) {
+  let formEdit = document.getElementById("formEdit" + id);
   if (formEdit.style.display == "block") {
     formEdit.style.display = "none";
   } else {
@@ -20,8 +20,8 @@ function showHideForm(a) {
   }
 }
 
-function hideForm(a) {
-  let formEdit = document.getElementById("formEdit" + a).style.display = "none";
+function hideForm(id) {
+  document.getElementById("formEdit" + id).style.display = "none";
 }
 
 

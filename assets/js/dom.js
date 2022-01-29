@@ -15,14 +15,19 @@ function addBook() {
   const title = document.getElementById("inputBookTitle").value;
   const author = document.getElementById("inputBookAuthor").value;
   const year = document.getElementById("inputBookYear").value;
-  const isComplete = document.getElementById("inputBookIsComplete");
+  const inputBookIsComplete = document.getElementById("inputBookIsComplete");
 
-  const book = makeBook(title, author, year, isComplete);
+  let isComplete;
+  if (inputBookIsComplete.checked) {
+    isComplete = true;
+  } else {
+    isComplete = false;
+  }
 
   const bookObject = composeBookObject(title, author, year, isComplete);
+  const book = makeBook(bookObject.id, bookObject.title, bookObject.author, bookObject.year, bookObject.isComplete);
 
-
-  if (isComplete.checked) {
+  if (bookObject.isComplete == true) {
     completedBOOKShelfList.append(book);
   } else {
     incompletedBOOKShelfList.append(book);
@@ -35,7 +40,7 @@ function addBook() {
 }
 
 // Menampilkan item dalam rak
-function makeBook(title, author, year, isComplete) {
+function makeBook(id, title, author, year, isComplete) {
 
   const titleBook = document.createElement("h3");
   titleBook.innerText = title;
@@ -100,7 +105,7 @@ function makeBook(title, author, year, isComplete) {
   const editFooter = document.createElement('div');
   editFooter.classList.add("edit-footer");
   editFooter.append(
-    createButtonUndo(),
+    createButtonUndo(id),
     createButtonSubmit()
   );
 
@@ -109,23 +114,25 @@ function makeBook(title, author, year, isComplete) {
 
   const formEdit = document.createElement('div');
   formEdit.classList.add("form-edit");
+  formEdit.setAttribute("id", "formEdit" + id);
   formEdit.append(form);
   // End element Edit 
 
   const article = document.createElement("article");
   article.classList.add("book-item")
   article.append(titleBook, authorBook, yearBook, actionMenu, formEdit);
+  // console.log(formEdit);
 
-  if (isComplete.checked || isComplete == true) {
+  if (isComplete == true) {
     actionMenu.append(
       createIncompleteButton(),
-      createEditButton(),
+      createEditButton(id),
       createDeleteButton()
     );
   } else {
     actionMenu.append(
       createCompleteButton(),
-      createEditButton(),
+      createEditButton(id),
       createDeleteButton()
     );
   }
@@ -154,12 +161,13 @@ function createIncompleteButton() {
   return button;
 }
 
-function createEditButton(eventListener) {
+function createEditButton(id) {
   const button = document.createElement("button");
   button.innerText = "Edit Data";
   button.classList.add("btn-yellow");
-  button.addEventListener("click", function (event) {
-    eventListener(event);
+  button.setAttribute("id", "btnEdit" + id);
+  button.addEventListener("click", function () {
+    showHideForm(id);
   });
   return button;
 }
@@ -174,13 +182,14 @@ function createDeleteButton() {
   return button;
 }
 
-function createButtonUndo(eventListener) {
+function createButtonUndo(id) {
   const button = document.createElement("button");
   button.innerText = "Batal";
   button.type = "button";
   button.classList.add("btn-undo");
-  button.addEventListener("click", function (event) {
-    eventListener(event);
+  button.setAttribute("id", "btnUndo" + id);
+  button.addEventListener("click", function () {
+    hideForm(id);
   });
   return button;
 }
@@ -212,7 +221,7 @@ function deleteBook(taskElement) {
 function moveBookToCompleted(taskElement) {
   const completeBookshelfList = document.getElementById(COMPLETE_BOOK_SHELF_LIST);
   const Book = findBook(taskElement[BOOK_ITEM_ID]);
-  const newBook = makeBook(Book.title, Book.author, Book.year, true);
+  const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, true);
 
   Book.isComplete = true;
   newBook[BOOK_ITEM_ID] = book.id;
@@ -226,7 +235,7 @@ function moveBookToCompleted(taskElement) {
 function moveBookToIncompleted(taskElement) {
   const incompleteBookshelfList = document.getElementById(INCOMPLETE_BOOK_SHELF_LIST);
   const Book = findBook(taskElement[BOOK_ITEM_ID]);
-  const newBook = makeBook(Book.title, Book.author, Book.year, false);
+  const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, false);
 
   Book.isComplete = false;
   newBook[BOOK_ITEM_ID] = book.id;
