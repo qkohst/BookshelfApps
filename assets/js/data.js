@@ -7,7 +7,6 @@ function checkLocalStorage() {
 
 function loadDataFromStorage() {
   let data = JSON.parse(localStorage.getItem(storageKey));
-
   if (data !== null) {
     books = data;
   }
@@ -53,7 +52,6 @@ function findbookIndex(bookId) {
 
     index++;
   }
-
   return -1;
 }
 
@@ -64,7 +62,6 @@ function refreshDataFromBooks() {
   for (book of books) {
     const newBook = makeBook(book.id, book.title, book.author, book.year, book.isComplete);
     newBook[BOOK_ITEM_ID] = book.id;
-
     if (book.isComplete) {
       completeBooksList.append(newBook);
     } else {

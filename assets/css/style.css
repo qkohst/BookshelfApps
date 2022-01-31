@@ -103,7 +103,6 @@ section > h2{
     font-size: 20px;
 }
 
-/* INPUT SECTION */
 .input-section > h2 {
     text-align: center;
 }
@@ -141,8 +140,6 @@ section > h2{
     margin-right: 10px;
 }
 
-
-/* SEARCH SECTION */
 
 .search-section > h2 {
     text-align: center;
@@ -193,8 +190,6 @@ section > h2{
     background: #206bfb;
 }
 
-
-/* Book Self */
 
 .book-shelf > .book-list {
     margin-top: 4px;
