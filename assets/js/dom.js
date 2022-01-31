@@ -5,6 +5,7 @@ const BOOK_ITEM_ID = "itemID";
 function addBook() {
   const incompletedBOOKShelfList = document.getElementById(INCOMPLETE_BOOK_SHELF_LIST);
   const completedBOOKShelfList = document.getElementById(COMPLETE_BOOK_SHELF_LIST);
+  const formInput = document.getElementById("inputBookForm");
 
   const title = document.getElementById("inputBookTitle").value;
   const author = document.getElementById("inputBookAuthor").value;
@@ -30,6 +31,8 @@ function addBook() {
   book[BOOK_ITEM_ID] = bookObject.id;
   books.push(bookObject);
   updateDataToStorage();
+  
+  formInput.reset();
 }
 
 
