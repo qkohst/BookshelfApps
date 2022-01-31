@@ -1,11 +1,6 @@
 const INCOMPLETE_BOOK_SHELF_LIST = "incompleteBookshelfList";
 const COMPLETE_BOOK_SHELF_LIST = "completeBookshelfList";
-
 const BOOK_ITEM_ID = "itemID";
-
-// const COMPLETED_BOOK_READ_ID = "completeBookshelfList";
-// const BOOK_ITEMID = "itemId"
-
 
 function addBook() {
 
@@ -35,12 +30,12 @@ function addBook() {
 
   book[BOOK_ITEM_ID] = bookObject.id;
   books.push(bookObject);
-
   updateDataToStorage();
 }
 
 // Menampilkan item dalam rak
 function makeBook(id, title, author, year, isComplete) {
+  const article = document.createElement("article");
 
   const titleBook = document.createElement("h3");
   titleBook.innerText = title;
@@ -68,6 +63,7 @@ function makeBook(id, title, author, year, isComplete) {
 
   const editBookTitle = document.createElement('input');
   editBookTitle.type = "text";
+  editBookTitle.setAttribute("id", "editBookTitle" + id);
   editBookTitle.value = title;
 
   const formGroupTitle = document.createElement('div');
@@ -80,6 +76,7 @@ function makeBook(id, title, author, year, isComplete) {
 
   const editBookAuthor = document.createElement('input');
   editBookAuthor.type = "text";
+  editBookAuthor.setAttribute("id", "editBookAuthor" + id);
   editBookAuthor.value = author;
 
   const formGroupAuthor = document.createElement('div');
@@ -91,6 +88,7 @@ function makeBook(id, title, author, year, isComplete) {
 
   const editBookYear = document.createElement('input');
   editBookYear.type = "number";
+  editBookYear.setAttribute("id", "editBookYear" + id);
   editBookYear.value = year;
 
   const formGroupYear = document.createElement('div');
@@ -106,7 +104,7 @@ function makeBook(id, title, author, year, isComplete) {
   editFooter.classList.add("edit-footer");
   editFooter.append(
     createButtonUndo(id),
-    createButtonSubmit()
+    createButtonSubmit(article, id)
   );
 
   const form = document.createElement('form');
@@ -118,7 +116,6 @@ function makeBook(id, title, author, year, isComplete) {
   formEdit.append(form);
   // End element Edit 
 
-  const article = document.createElement("article");
   article.classList.add("book-item")
   article.append(titleBook, authorBook, yearBook, actionMenu, formEdit);
   // console.log(formEdit);
@@ -194,13 +191,14 @@ function createButtonUndo(id) {
   return button;
 }
 
-function createButtonSubmit(eventListener) {
+function createButtonSubmit(bookElement, id) {
   const button = document.createElement("button");
   button.innerText = "Simpan";
-  button.type = "submit";
+  button.type = "button";
   button.classList.add("btn-submit");
   button.addEventListener("click", function (event) {
-    eventListener(event);
+    event.preventDefault();
+    updateBook(bookElement, id);
   });
   return button;
 }
@@ -208,41 +206,93 @@ function createButtonSubmit(eventListener) {
 //end bUTTON
 
 // Hapus List Buku 
-function deleteBook(taskElement) {
-  const bookPosition = findbookIndex(taskElement[BOOK_ITEM_ID]);
-  books.splice(bookPosition, 1);
-
-  taskElement.remove();
-  updateDataToStorage();
+function deleteBook(bookElement) {
+  const book = findBook(bookElement[BOOK_ITEM_ID]);
+  if (confirm("Hapus buku " + book.title + " ?")) {
+    const bookPosition = findbookIndex(bookElement[BOOK_ITEM_ID]);
+    books.splice(bookPosition, 1);
+    bookElement.remove();
+    updateDataToStorage();
+    alert("Data buku " + book.title + " berhasil dihapus !");
+  }
 }
 
 // Memindahkan Book ke Rak Sudah Dibaca 
 
-function moveBookToCompleted(taskElement) {
+function moveBookToCompleted(bookElement) {
   const completeBookshelfList = document.getElementById(COMPLETE_BOOK_SHELF_LIST);
-  const Book = findBook(taskElement[BOOK_ITEM_ID]);
-  const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, true);
-
-  Book.isComplete = true;
-  newBook[BOOK_ITEM_ID] = book.id;
-
-  completeBookshelfList.append(newBook);
-  taskElement.remove();
-
-  updateDataToStorage();
+  const Book = findBook(bookElement[BOOK_ITEM_ID]);
+  if (confirm("Tandai ke rak selesai dibaca ?")) {
+    const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, true);
+    Book.isComplete = true;
+    newBook[BOOK_ITEM_ID] = book.id;
+    completeBookshelfList.append(newBook);
+    bookElement.remove();
+    updateDataToStorage();
+  }
 }
 
-function moveBookToIncompleted(taskElement) {
+function moveBookToIncompleted(bookElement) {
   const incompleteBookshelfList = document.getElementById(INCOMPLETE_BOOK_SHELF_LIST);
-  const Book = findBook(taskElement[BOOK_ITEM_ID]);
-  const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, false);
-
-  Book.isComplete = false;
-  newBook[BOOK_ITEM_ID] = book.id;
-
-  incompleteBookshelfList.append(newBook);
-  taskElement.remove();
-
-  updateDataToStorage();
+  const Book = findBook(bookElement[BOOK_ITEM_ID]);
+  if (confirm("Tandai ke rak belum selesai dibaca ?")) {
+    const newBook = makeBook(Book.id, Book.title, Book.author, Book.year, false);
+    Book.isComplete = false;
+    newBook[BOOK_ITEM_ID] = book.id;
+    incompleteBookshelfList.append(newBook);
+    bookElement.remove();
+    updateDataToStorage();
+  }
 }
 
+function updateBook(bookElement, id) {
+  let bookEdit;
+  let title = document.getElementById("editBookTitle" + id).value;
+  let author = document.getElementById("editBookAuthor" + id).value;
+  let year = document.getElementById("editBookYear" + id).value;
+
+  const book = findBook(bookElement[BOOK_ITEM_ID]);
+  if (confirm("Simpan data buku ?")) {
+    const newBook = makeBook(book.id, title, author, year, book.isComplete);
+
+    if (book.isComplete) {
+      bookEdit = document.getElementById(COMPLETE_BOOK_SHELF_LIST);
+    } else {
+      bookEdit = document.getElementById(INCOMPLETE_BOOK_SHELF_LIST);
+    }
+
+    newBook[BOOK_ITEM_ID] = book.id;
+    bookEdit.append(newBook);
+    bookElement.remove();
+    updateDataToStorage();
+
+    alert("Data buku " + book.title + " berhasil disimpan !");
+  }
+}
+
+
+// fitur pencarian
+const searchBookTitle = document.querySelector("#searchBookTitle");
+searchBookTitle.addEventListener("keyup", searchBook);
+
+function searchBook(e) {
+  const text = e.target.value.toLowerCase();
+  const bookItems = document.querySelectorAll(".book-item");
+
+  const resetSearch = document.getElementById("resetSearch");
+  if (text !== "") {
+    resetSearch.style.display = "block";
+  } else {
+    resetSearch.style.display = "none";
+  }
+
+  bookItems.forEach((book) => {
+    const itemText = book.textContent.toLowerCase();
+
+    if (itemText.indexOf(text) !== -1) {
+      book.setAttribute("style", "display: block");
+    } else {
+      book.setAttribute("style", "display: none");
+    }
+  });
+}

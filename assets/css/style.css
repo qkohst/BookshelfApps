@@ -172,6 +172,7 @@ section > h2{
 }
 
 .search-section form button {
+    display: none;
     position: absolute;
     top: -1px;
     right: -1px;

@@ -1,6 +1,5 @@
-
-let inputBookIsComplete = document.getElementById("inputBookIsComplete");
-let rack = document.getElementById("rack");
+const inputBookIsComplete = document.getElementById("inputBookIsComplete");
+const rack = document.getElementById("rack");
 
 function updateRack() {
   if (inputBookIsComplete.checked) {
@@ -12,7 +11,7 @@ function updateRack() {
 
 
 function showHideForm(id) {
-  let formEdit = document.getElementById("formEdit" + id);
+  const formEdit = document.getElementById("formEdit" + id);
   if (formEdit.style.display == "block") {
     formEdit.style.display = "none";
   } else {
@@ -25,4 +24,3 @@ function hideForm(id) {
 }
 
 
-// LANJUT Show Hidden By Id EDIT FORM
